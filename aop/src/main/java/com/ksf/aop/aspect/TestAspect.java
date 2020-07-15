@@ -1,10 +1,9 @@
 package com.ksf.aop.aspect;
 
+import lombok.SneakyThrows;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -40,5 +39,14 @@ public class TestAspect {
     @After("@annotation(test)")
     public void after(JoinPoint point, TestAnnotation test) {
         System.out.println("After method run :" + test.value());
+    }
+
+    @SneakyThrows
+    @Around("@annotation(test)")
+    public Object around(ProceedingJoinPoint point, TestAnnotation test) {
+        System.out.println("Around before method run :" + test.value());
+        Object object = point.proceed();
+        System.out.println("Around after method run :" + test.value());
+        return object;
     }
 }

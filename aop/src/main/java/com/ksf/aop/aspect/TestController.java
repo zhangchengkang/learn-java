@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @TestAnnotation(value = "yes,you are right")
+    @TestAnnotation(value = "OK")
     @RequestMapping("/have")
     public String haveAnnotation() {
+        System.out.println("haveAnnotation");
         return "haveAnnotation";
     }
 
