@@ -15,6 +15,7 @@ public class TestController {
 
     @RequestMapping("/not")
     public String notAnnotation() {
+        System.out.println("notAnnotation");
         return "notAnnotation";
     }
 }

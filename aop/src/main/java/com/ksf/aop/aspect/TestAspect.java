@@ -49,4 +49,13 @@ public class TestAspect {
         System.out.println("Around after method run :" + test.value());
         return object;
     }
+
+    @SneakyThrows
+    @Around("execution(* com.ksf.aop.aspect.TestController.*(..))")
+    public  Object aroundExe(ProceedingJoinPoint point){
+        System.out.println("Around before com.ksf.aop.aspect.TestController ");
+        Object object = point.proceed();
+        System.out.println("Around after com.ksf.aop.aspect.TestController ");
+        return object;
+    }
 }
