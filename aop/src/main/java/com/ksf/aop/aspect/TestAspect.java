@@ -36,7 +36,7 @@ public class TestAspect {
         return method.getAnnotation(TestAnnotation.class);
     }
 
-    //简写
+    //上面的简写
     @After("@annotation(test)")
     public void after(JoinPoint point, TestAnnotation test) {
         System.out.println("After method run :" + test.value());
