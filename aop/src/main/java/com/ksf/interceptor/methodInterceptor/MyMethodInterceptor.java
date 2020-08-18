@@ -1,4 +1,4 @@
-package com.ksf.aop.methodInterceptor;
+package com.ksf.interceptor.methodInterceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -13,11 +13,11 @@ public class MyMethodInterceptor implements MethodInterceptor {
     public Object invoke(MethodInvocation invocation) throws Throwable {
         Object result = null;
         try {
-            System.out.println("方法执行之前：" + invocation.getMethod().toString());
+            System.out.println("方法执行之前");
 
             result = invocation.proceed();
 
-            System.out.println("方法执行之后：" + invocation.getMethod().toString());
+            System.out.println("方法执行之后");
             System.out.println("方法正常运行结果：" + result);
 
             return result;

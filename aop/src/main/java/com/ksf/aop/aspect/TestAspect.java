@@ -51,7 +51,7 @@ public class TestAspect {
     }
 
     @SneakyThrows
-    @Around("execution(* com.ksf.aop.aspect.TestController.*(..))")
+    @Around("execution(* com.ksf.aop.aspect.AspectController.*(..))")
     public  Object aroundExe(ProceedingJoinPoint point){
         System.out.println("Around before com.ksf.aop.aspect.TestController ");
         Object object = point.proceed();
