@@ -35,7 +35,7 @@ public class TestAspect {
         return method.getAnnotation(TestAnnotation.class);
     }
 
-    //上面的简写
+    //也可以把@Pointcut表达式嵌入到@After里面
     @After("@annotation(test)")
     public void after(JoinPoint point, TestAnnotation test) {
         System.out.println("After method run :" + test.value());
