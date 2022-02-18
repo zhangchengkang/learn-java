@@ -1,0 +1,4 @@
+org.springframework.context.ApplicationContextInitializer=\
+com.ksf.BeanLifecycle.UserApplicationContextInitializer
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.ksf.BeanLifecycle.UserEnvironmentPostProcessor
