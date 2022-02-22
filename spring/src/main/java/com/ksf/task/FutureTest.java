@@ -13,6 +13,8 @@ import java.util.concurrent.CompletableFuture;
 public class FutureTest {
 
     /**
+     * 不指定线程池  会使用默认的ForkJoinPool 核心线程数 2*核心数
+     *
      * supplyAsync 创建带返回值的异步任务 executor.submit
      * runAsync  创建无返回值的异步任务  executor.execute
      */

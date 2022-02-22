@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 @Component
 @ConditionalOnProperty(prefix = "user", name = "enable", havingValue = "true")
 @ConfigurationProperties(prefix = "user")
-public class User  implements InitializingBean{
+public class User implements InitializingBean {
     private String userName;
     private String passWord;
 
