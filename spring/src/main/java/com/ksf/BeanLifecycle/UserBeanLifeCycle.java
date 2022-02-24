@@ -20,7 +20,7 @@ import java.util.Map;
  * @Date: 2022/2/10 14:46
  */
 @Component
-public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, InitializingBean, DisposableBean, ApplicationContextAware, BeanPostProcessor, BeanDefinitionRegistryPostProcessor {
+public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, ApplicationContextAware, BeanDefinitionRegistryPostProcessor, InitializingBean, DisposableBean, BeanPostProcessor {
 
     private BeanDefinitionRegistry registry;
 
@@ -36,6 +36,40 @@ public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, Initi
         System.out.println("setBeanFactory");
     }
 
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+        System.out.println("setApplicationContext");
+    }
+
+    //BeanDefinitionRegistryPostProcessor接口在读取项目中的beanDefinition之后执行，提供的一个补充扩展接口，用来动态注册beanDefinition
+    //调用点：在PostProcessorRegistrationDelegate中
+    @Override
+    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        this.registry = registry;
+        System.out.println("postProcessBeanDefinitionRegistry");
+        BeanDefinitionBuilder datasourceBuilder = BeanDefinitionBuilder.genericBeanDefinition(Order.class);
+
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("name", "百事可乐");
+        properties.put("code", "posdaqe");
+        properties.forEach(datasourceBuilder::addPropertyValue);
+
+        AbstractBeanDefinition beanDefinition = datasourceBuilder.getBeanDefinition();
+        registry.registerBeanDefinition("orderBean", beanDefinition);
+        System.out.println("registry bean :orderBean");
+    }
+
+
+    //BeanFactoryPostProcessor 用来在读取所有的beanDefinition信息之后，实例化之前，通过该接口可进一步自行处理，比如修改beanDefinition等
+    //调用点在上面第一个扩展接口之后，也在PostProcessorRegistrationDelegate
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+//        beanFactory.addBeanPostProcessor();
+        System.out.println("postProcessBeanFactory");
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("UserBeanPostProcessor afterPropertiesSet");
@@ -48,11 +82,6 @@ public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, Initi
         System.out.println("destroy");
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-        System.out.println("setApplicationContext");
-    }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -73,26 +102,5 @@ public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, Initi
         return bean;
     }
 
-    //    BeanDefinitionRegistryPostProcessor
-    @Override
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        this.registry = registry;
-        System.out.println("postProcessBeanDefinitionRegistry");
-        BeanDefinitionBuilder datasourceBuilder = BeanDefinitionBuilder.genericBeanDefinition(Order.class);
 
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("name", "百事可乐");
-        properties.put("code", "posdaqe");
-        properties.forEach(datasourceBuilder::addPropertyValue);
-
-        AbstractBeanDefinition beanDefinition = datasourceBuilder.getBeanDefinition();
-        registry.registerBeanDefinition("orderBean", beanDefinition);
-        System.out.println("registry bean :orderBean");
-    }
-
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-//        beanFactory.addBeanPostProcessor();
-        System.out.println("postProcessBeanFactory");
-    }
 }
