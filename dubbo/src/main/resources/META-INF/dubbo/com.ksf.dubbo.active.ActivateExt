@@ -1,0 +1,5 @@
+group=com.ksf.dubbo.active.GroupActivateExtImpl
+value=com.ksf.dubbo.active.ValueActivateExtImpl
+order1=com.ksf.dubbo.active.OrderActivateExtImpl1
+order2=com.ksf.dubbo.active.OrderActivateExtImpl2
+com.ksf.dubbo.active.ActivateExtImpl

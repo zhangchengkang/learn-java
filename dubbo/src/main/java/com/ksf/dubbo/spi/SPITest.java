@@ -1,6 +1,7 @@
 package com.ksf.dubbo.spi;
 
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
+import com.alibaba.dubbo.rpc.Filter;
 
 import java.util.ServiceLoader;
 

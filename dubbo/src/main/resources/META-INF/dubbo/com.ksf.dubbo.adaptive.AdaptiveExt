@@ -1,0 +1,3 @@
+spring=com.ksf.dubbo.adaptive.SpringAdaptiveExtImpl
+mybatis=com.ksf.dubbo.adaptive.SpringAdaptiveExtImpl
+
