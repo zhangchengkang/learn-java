@@ -15,7 +15,7 @@ public class ActivateTest {
         URL url = URL.valueOf("test://localhost/test");
 
         print(loader, url, "default_group");
-        print(loader, url, "group2");
+        print(loader, url, "group");
         print(loader, url, "order");
 
         //@Activate(value = {"value"}, group = {"value"})来激活扩展,不加找不到
