@@ -1,5 +1,6 @@
 
-refresh-obtainFreshBeanFactory-refreshBeanFactory-loadBeanDefinitions-doLoadBeanDefinitions-registerBeanDefinitions-doRegisterBeanDefinitions-parseBeanDefinitions-parseDefaultElement-parseCustomElement
+refresh-obtainFreshBeanFactory-refreshBeanFactory-loadBeanDefinitions-doLoadBeanDefinitions
+    -registerBeanDefinitions-doRegisterBeanDefinitions-parseBeanDefinitions-parseDefaultElement-parseCustomElement
 		NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);//需要在spring.handles配置dubboNamespaceHandler
       namespaceHandler.init(){
           registerBeanDefinitionParser("service", new DubboBeanDefinitionParser(ServiceBean.class, true));
@@ -7,35 +8,19 @@ refresh-obtainFreshBeanFactory-refreshBeanFactory-loadBeanDefinitions-doLoadBean
       };
    DubboBeanDefinitionParser parse =   NamespaceHandlerSupport.findParserForElement
    parse.parse//解析xml标签
-serviveBean  serviceConfig  InitializingBean-afterPropertiesSet-publishEvent-onApplicationEvent-export-doExportUrls-doExportUrlsFor1Protocol-protocol.export-RegistryProtocol.export-register-registry.register-zkregistry.register
+serviveBean  serviceConfig  InitializingBean-afterPropertiesSet-publishEvent-onApplicationEvent-export-doExportUrls
+    -doExportUrlsFor1Protocol-protocol.export-RegistryProtocol.export-register-registry.register-zkregistry.register
 referenceBean  referenceConfig  InitializingBean-afterPropertiesSet-getObject-get-init-createProxy-putToMap
 
 一级缓存singletonObjects 完全实例化好的bean map
 二级缓存earlySingletonObjects 只分配空间的对象bean map  跟一级缓存区分 怕拿到没实例化好的对象  引发空指针
 三级缓存singletonFactories bean Factory map         解决aop下的循环依赖  因为aop之后会生成代理对象  但是一级缓存返回的是实际对象  加入singletonFactories三级缓存的前提是执行了构造器，所以构造器的循环依赖没法解
 
-
-1.3 避免Dubbo的提供方限流设置与泛化调用同时出现
-设置Dubbo提供方限流设置如下：
-<dubbo:provider executes="5000"/>
-
-Dubbo调用设置以上限流设置的服务：
-GenericService barService = (GenericService) applicationContext.getBean("barService");
-Object result = barService.$invoke("sayHello", new String[] { "java.lang.String" }, new Object[] { "World" });
-
-请避免Dubbo的提供方限流设置与泛化调用同时使用，接口配置了全局的executes参数后，对并发请求接口做了限制，跟踪代码发现接口请求计数不会扣减。这是Dubbo的一个bug，请参考如下：
-https://github.com/apache/dubbo/issues/5052
-
-- GI经常性重启
-redis序列化用的是protobuf，如果放入的对象没有默认无参构造方法，它每次会为放入的pojo对象构建一个class，导致非堆内存每隔一段时间就撑爆
-
 tidb
 https://blog.csdn.net/m0_37683758/article/details/86738403
 
-spring
-https://blog.csdn.net/woshilijiuyi/article/details/85396492
-
 springboot
+https://blog.csdn.net/woshilijiuyi/article/details/85396492
 https://www.cnblogs.com/grey-wolf/p/13034371.html
 
 spingmybatis
