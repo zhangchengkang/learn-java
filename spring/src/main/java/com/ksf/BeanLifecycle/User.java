@@ -14,7 +14,9 @@ import javax.annotation.PostConstruct;
 @Component
 @ConditionalOnProperty(prefix = "user", name = "enable", havingValue = "true")
 @ConfigurationProperties(prefix = "user")
-public class User implements InitializingBean {
+public class User
+//        implements InitializingBean
+{
     private String userName;
     private String passWord;
 
@@ -36,6 +38,16 @@ public class User implements InitializingBean {
         this.passWord = passWord;
     }
 
+    public User() {
+        System.out.println("执行User无参构造");
+    }
+
+    public User(String userName, String passWord) {
+        System.out.println("执行User有参构造");
+        this.userName = userName;
+        this.passWord = passWord;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -44,9 +56,6 @@ public class User implements InitializingBean {
                 '}';
     }
 
-    public User() {
-        System.out.println("执行user构造");
-    }
 
     //这个注解跟xml写init-method一样
     @PostConstruct
@@ -54,9 +63,9 @@ public class User implements InitializingBean {
         System.out.println("PostConstruct/init-method" + toString());
     }
 
-    //只对自己这个bean有效
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("user afterPropertiesSet");
-    }
+//    //只对自己这个bean有效
+//    @Override
+//    public void afterPropertiesSet() throws Exception {
+//        System.out.println("user afterPropertiesSet");
+//    }
 }

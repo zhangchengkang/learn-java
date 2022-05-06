@@ -11,6 +11,6 @@ import com.alibaba.dubbo.common.extension.SPI;
 @SPI
 public interface AdaptiveExt {
 
-    @Adaptive(value = {"adaptiveName"})
+    @Adaptive(value = {"adaptiveName"})//@Adaptive就代替了AdaptiveExtProxy
     String echo(String msg, URL url);
 }

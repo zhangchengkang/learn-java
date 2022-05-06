@@ -14,7 +14,7 @@ public class ThreadPoolExecutorTest {
     public static void main(String[] args) throws Exception {
         int n = Runtime.getRuntime().availableProcessors();//获取到服务器的cpu内核
         System.out.println("服务器的cpu内核:{}" + n);
-//        threadPoolTaskExecutor();
+        threadPoolTaskExecutor();
 //        threadPoolExecutor();
 
         Executors.newFixedThreadPool(3);//核心自己传,核心线程=最大线程,LinkedBlockingQueue
