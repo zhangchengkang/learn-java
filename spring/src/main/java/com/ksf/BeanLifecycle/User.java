@@ -51,7 +51,7 @@ public class User implements InitializingBean {
     //这个注解跟xml写init-method一样
     @PostConstruct
     public void init() {
-        System.out.println("annotation init" + toString());
+        System.out.println("PostConstruct/init-method" + toString());
     }
 
     //只对自己这个bean有效

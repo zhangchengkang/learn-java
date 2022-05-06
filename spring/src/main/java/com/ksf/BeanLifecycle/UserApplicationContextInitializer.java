@@ -13,6 +13,6 @@ public class UserApplicationContextInitializer implements ApplicationContextInit
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
         ConfigurableEnvironment environment = applicationContext.getEnvironment();
-        System.out.println("initialize");
+        System.out.println("ApplicationContextInitializer--initialize");
     }
 }

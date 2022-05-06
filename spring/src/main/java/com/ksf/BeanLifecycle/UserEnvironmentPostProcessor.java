@@ -13,6 +13,6 @@ public class UserEnvironmentPostProcessor implements EnvironmentPostProcessor {
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         Integer port = environment.getProperty("server.port", Integer.class, 8080);
-        System.out.println("postProcessEnvironment:" + port);
+        System.out.println("EnvironmentPostProcessor--postProcessEnvironment:" + port);
     }
 }
