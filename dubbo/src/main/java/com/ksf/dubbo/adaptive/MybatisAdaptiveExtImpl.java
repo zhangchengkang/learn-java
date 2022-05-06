@@ -9,6 +9,6 @@ import com.alibaba.dubbo.common.URL;
 public class MybatisAdaptiveExtImpl implements AdaptiveExt{
     @Override
     public String echo(String msg, URL url) {
-        return "mybatis";
+        return "mybatis"+msg;
     }
 }

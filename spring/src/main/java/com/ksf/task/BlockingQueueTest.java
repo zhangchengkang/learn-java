@@ -23,14 +23,15 @@ public class BlockingQueueTest {
 
         BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(3);
 
-        //remove 当阻塞队列空时：再往队列中remove移除元素，会抛出NoSuchException
-//        blockingQueue.remove();
 
         //add 当阻塞队列满时：在往队列中add插入元素会抛出 IllegalStateException：Queue full
 //        System.out.println(blockingQueue.add("a"));
 //        System.out.println(blockingQueue.add("b"));
 //        System.out.println(blockingQueue.add("c"));
 //        System.out.println(blockingQueue.add("XXX"));
+
+        //remove 当阻塞队列空时：再往队列中remove移除元素，会抛出NoSuchException
+//        blockingQueue.remove();
 
         //offer 插入方法，成功true，失败false
 //        System.out.println(blockingQueue.offer("a"));

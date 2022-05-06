@@ -20,7 +20,14 @@ import java.util.Map;
  * @Date: 2022/2/10 14:46
  */
 @Component
-public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, ApplicationContextAware, BeanDefinitionRegistryPostProcessor, InitializingBean, DisposableBean, BeanPostProcessor {
+public class UserBeanLifeCycle implements
+        BeanNameAware,
+        BeanFactoryAware,
+        ApplicationContextAware,
+        BeanDefinitionRegistryPostProcessor,
+        InitializingBean,
+        DisposableBean,
+        BeanPostProcessor {
 
     private BeanDefinitionRegistry registry;
 
@@ -28,19 +35,19 @@ public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, Appli
 
     @Override
     public void setBeanName(String s) {
-        System.out.println("setBeanName");
+        System.out.println("BeanNameAware--setBeanName");
     }
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.out.println("setBeanFactory");
+        System.out.println("BeanFactoryAware--setBeanFactory");
     }
 
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-        System.out.println("setApplicationContext");
+        System.out.println("ApplicationContextAware--setApplicationContext");
     }
 
     //BeanDefinitionRegistryPostProcessor接口在读取项目中的beanDefinition之后执行，提供的一个补充扩展接口，用来动态注册beanDefinition
@@ -48,7 +55,7 @@ public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, Appli
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         this.registry = registry;
-        System.out.println("postProcessBeanDefinitionRegistry");
+        System.out.println("BeanDefinitionRegistryPostProcessor--postProcessBeanDefinitionRegistry");
         BeanDefinitionBuilder datasourceBuilder = BeanDefinitionBuilder.genericBeanDefinition(Order.class);
 
         Map<String, Object> properties = new HashMap<>();
@@ -58,7 +65,7 @@ public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, Appli
 
         AbstractBeanDefinition beanDefinition = datasourceBuilder.getBeanDefinition();
         registry.registerBeanDefinition("orderBean", beanDefinition);
-        System.out.println("registry bean :orderBean");
+        System.out.println("BeanDefinitionRegistryPostProcessor--registry bean :orderBean");
     }
 
 
@@ -67,26 +74,26 @@ public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, Appli
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 //        beanFactory.addBeanPostProcessor();
-        System.out.println("postProcessBeanFactory");
+        System.out.println("BeanFactoryPostProcessor--postProcessBeanFactory");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("UserBeanPostProcessor afterPropertiesSet");
+        System.out.println("InitializingBean--afterPropertiesSet");
     }
 
 
     //需要手动调用容器的close方法
     @Override
     public void destroy() throws Exception {
-        System.out.println("destroy");
+        System.out.println("DisposableBean--destroy");
     }
 
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if (bean.getClass().equals(User.class)) {
-            System.out.println("postProcessBeforeInitialization");
+            System.out.println("BeanPostProcessor--postProcessBeforeInitialization");
         }
         if (bean.getClass().equals(Order.class)) {
             System.out.println(beanName + "   " + bean.toString());
@@ -97,7 +104,7 @@ public class UserBeanLifeCycle implements BeanNameAware, BeanFactoryAware, Appli
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean.getClass().equals(User.class)) {
-            System.out.println("postProcessAfterInitialization");
+            System.out.println("BeanPostProcessor--postProcessAfterInitialization");
         }
         return bean;
     }
