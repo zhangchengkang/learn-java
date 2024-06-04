@@ -12,6 +12,11 @@
     <modules>
         <module>spring</module>
         <module>dubbo</module>
+        <module>netty</module>
+        <module>rabbltMQ</module>
+        <module>rocketMQ</module>
+        <module>jvm</module>
+        <module>algorithm</module>
     </modules>
 
     <dependencyManagement>
@@ -19,7 +24,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>1.5.9.RELEASE</version>
+                <version>2.2.1.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

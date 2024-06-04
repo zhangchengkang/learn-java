@@ -3,7 +3,6 @@ package com.ksf.beanDefinition.importAnnotation;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
-import  com.ksf.beanDefinition.importAnnotation.WebParamsParserRegistrar;
 
 /**
  * @Author: zhangchengkang

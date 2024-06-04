@@ -62,7 +62,7 @@ public class UserBeanLifeCycle implements
         System.out.println("BeanDefinitionRegistryPostProcessor--postProcessBeanDefinitionRegistry");
 
         //todo 这玩意会使user无属性注入
-//        Object user = applicationContext.getBean("user");
+        //Object user = applicationContext.getBean("user");
 
         Map<String, Object> properties = new HashMap<>();
         properties.put("name", "百事可乐");
@@ -71,7 +71,7 @@ public class UserBeanLifeCycle implements
         BeanDefinitionBuilder datasourceBuilder = BeanDefinitionBuilder.genericBeanDefinition(Order.class);
         properties.forEach(datasourceBuilder::addPropertyValue);
         AbstractBeanDefinition beanDefinition = datasourceBuilder.getBeanDefinition();
-        registry.registerBeanDefinition("order", beanDefinition);
+        registry.registerBeanDefinition("order1", beanDefinition);
         System.out.println("BeanDefinitionRegistryPostProcessor--registry bean :order");
     }
 
@@ -80,16 +80,16 @@ public class UserBeanLifeCycle implements
     //调用点在上面第一个扩展接口之后，也在PostProcessorRegistrationDelegate
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-//        beanFactory.addBeanPostProcessor();
+        //beanFactory.addBeanPostProcessor();
         System.out.println("BeanFactoryPostProcessor--postProcessBeanFactory");
     }
 
 
     //用于预测Bean的类型，返回第一个预测成功的Class类型，如果不能预测返回null；
-    // 当你调用BeanFactory.getType(name)时当通过bean的名字无法得到bean类型信息时就调用该回调方法来决定类型信息。
+    //当你调用BeanFactory.getType(name)时当通过bean的名字无法得到bean类型信息时就调用该回调方法来决定类型信息。
     @Override
     public Class<?> predictBeanType(Class<?> aClass, String s) throws BeansException {
-//      print(aClass, Thread.currentThread().getStackTrace()[1].getMethodName());
+        //print(aClass, Thread.currentThread().getStackTrace()[1].getMethodName());
         return aClass;
     }
 
@@ -158,10 +158,6 @@ public class UserBeanLifeCycle implements
         return bean;
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("UserBeanPostProcessor--afterPropertiesSet");
-    }
 
     //初始化bean之后，相当于把bean注入spring上下文之后
     @Override

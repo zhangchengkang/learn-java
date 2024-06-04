@@ -37,6 +37,7 @@ public class MyHandlerInterceptor extends HandlerInterceptorAdapter {
         } else {
             System.out.println("preHandle");
         }
+
         return true;
     }
 

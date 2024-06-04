@@ -1,0 +1,9 @@
+Channel : Netty最核心的接口。NIO通讯模式中通过Channel进行Socket套接字的读，写和同时读写操作。
+ChannelHandler : 因为直接使用Channel会比较麻烦，所以在Netty编程中通过ChannelHandler间接操作Channel，从而简化开发。
+ChannelPipeline : 可以理解为一个管理ChandlerHandler的链表。对Channel进行操作时，Pipeline负责从尾部依次调用每一个Handler进行处理。每个Channel都有一个属于自己的ChannelPipeline。
+ChannelHandlerContext : ChannelPipeline通过ChannelHandlerContext间接管理每个ChannelHandler。
+
+
+EventLoopGroup : 本质是个线程池，继承了ScheduledExecutorService 定时任务线程池。
+NioEventLoopGroup : 是用来处理NIO通信模式的线程池。每个线程池有N个NioEventLoop来处理Channel事件，每一个NioEventLoop负责处理N个Channel。
+NioEventLoop : 负责不停地轮询IO事件，处理IO事件和执行任务，类比多路复用器，细化分三件事。
