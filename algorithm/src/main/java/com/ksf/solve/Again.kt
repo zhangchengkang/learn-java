@@ -211,7 +211,6 @@ fun reverseBetween1(head: ListNode?, left: Int, right: Int): ListNode? {
 }
 
 fun reverse1(head: ListNode?): ListNode {
-
     var head = head
     var pre: ListNode? = null
     while (head != null) {
@@ -223,7 +222,6 @@ fun reverse1(head: ListNode?): ListNode {
     }
 
     return pre!!
-
 }
 
 fun hasCycle1(head: ListNode?): Boolean {
